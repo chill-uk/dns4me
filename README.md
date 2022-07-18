@@ -128,3 +128,18 @@ Uncomment this line in the dns4me.sh script:
 * If all went well, visit the [DNS4ME Status](http://dns4me.net/check) page to check if all of the tests pass.
 
 * Sit back and enjoy all of your favourite services geo-unblocked on all of your devices on your network.
+
+## FAQ
+
+* I cannot access dns4me.net after running your script.
+
+You have probably entered the wrong dns4me Api Key.
+
+Delete the current dns4me config:
+
+```sh
+rm /etc/dnsmasq.d/03-dns4me.conf
+service dnsmasq restart
+```
+
+Check your dns4me Api Key and try again

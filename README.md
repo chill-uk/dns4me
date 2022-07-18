@@ -108,19 +108,19 @@ If you want telegram integrations, follow the instructions below:
 
 * [Create a telegram bot (for change notification - optional)](https://sendpulse.com/knowledge-base/chatbot/create-telegram-chatbot)
 
-Make sure to make a note of the GROUP_ID and BOT_TOKEN
+Make sure to make a note of the groupId and botToken
 
-* Add your `BOT_TOKEN` and `GROUP_ID` to the `dns4me.sh` script
+* Add your `botToken` and `groupId` to the `dns4me.sh` script
 
 ```sh
-GROUP_ID=xxxxxxxx
-BOT_TOKEN=xxxxx:xxxxxx-xxxxx-xxxx
+groupId=xxxxxxxx
+botToken=xxxxx:xxxxxx-xxxxx-xxxx
 ```
 
 Uncomment this line in the dns4me.sh script:
 
 ```sh
-#curl -s --data "text=DNS4ME changed: $diff_status" --data "chat_id=$GROUP_ID" 'https://api.telegram.org/bot'$BOT_TOKEN'/sendMessage' > /dev/null
+#curl -s --data "text=DNS4ME changed: $diff_status" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null
 ```
 
 ## Finished!

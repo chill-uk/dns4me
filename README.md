@@ -92,7 +92,7 @@ chmod+x dns4me.sh
 * Edit the following line in the dns4me.sh script with your API Key
 
 ```sh
-curl https://dns4me.net/api/v2/get_hosts/dnsmasq/xxxxxx-xxxxxxx-xxxxxxx-xxxxx > /dev/shm/03-dns4me.conf
+dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 * Setup task-scheduler to execute the dns4me script:

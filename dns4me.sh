@@ -3,9 +3,10 @@
 
 groupId=xxxxxxxxx
 botToken=xxxxxxxxx:xxxxxx-xxxxxxxxxxxxxxxxxxxx-xxxxxxx
+dns4meApikey=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 echo "Updating DNS4ME"
-curl https://dns4me.net/api/v2/get_hosts/dnsmasq/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > /dev/shm/03-dns4me.conf
+curl "https://dns4me.net/api/v2/get_hosts/dnsmasq/$dns4meApikey" > /dev/shm/03-dns4me.conf
 
 # Scraping your closest DNS4ME DNS servers
 dnsServer1=$(tail -1 /dev/shm/03-dns4me.conf)
@@ -28,5 +29,5 @@ else
     mv /etc/dnsmasq.d/03-dns4me.conf /tmp/03-dns4me_`date +%d%b%Y`.conf
     mv /dev/shm/03-dns4me.conf /etc/dnsmasq.d/03-dns4me.conf
     service dnsmasq restart
-    curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null
+    #curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null
 fi

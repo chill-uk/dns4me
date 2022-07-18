@@ -11,6 +11,9 @@ This script will enable all of your devices on your network to benefit from geo-
 
 + With optional telegram notification for new config changes.
 
+| device           | version                | compatible |
+|------------------|------------------------|------------|
+| EdgeRouterLite-3 | EdgeOS v2.0.9-hotfix.4 | yes        |
 
 ## Overview
 

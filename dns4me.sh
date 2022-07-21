@@ -11,16 +11,19 @@ backupConfig=/tmp/03-dns4me_`date +%d%b%Y`.conf
 echo "Updating DNS4ME"
 dnsmasqEntries=$(curl "https://dns4me.net/api/v2/get_hosts/dnsmasq/$dns4meApikey")
 
+# Checking to see if $dnsmasqEntries downloaded correctly. 
 if [ -z "$dnsmasqEntries" ]
 then
     echo "Could not download dnsmasq entries from dns4me.net. Please check your dns4me Api Key and try again."
 else
-
-    dnsServer1=$(echo "$dnsmasqEntries" | tail -2 | head -1)
-    dnsServer2=$(echo "$dnsmasqEntries" | tail -1)
+    # Scraping your closest DNS4ME DNS servers
+    dnsServer1=$(echo "$dnsmasqEntries" | sed -n '1p')
+    dnsServer2=$(echo "$dnsmasqEntries" | sed -n '2p')
 
 cat << EOF > "$tempConfig"
 $dnsmasqEntries
+# Adding dnsmasq for dns4me.net so the tests pass
+# http://dns4me.net/check
 server=/dns4me.net/${dnsServer1##*/}
 server=/dns4me.net/${dnsServer2##*/}
 EOF
@@ -38,7 +41,7 @@ EOF
                 service dnsmasq restart
                 curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/n$
             fi
-        else 
+        else
             echo "No config file found. Setting up smartdns"
             mv $tempConfig $currentConfig
             service dnsmasq restart

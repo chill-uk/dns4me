@@ -29,22 +29,22 @@ server=/dns4me.net/${dnsServer2##*/}
 EOF
 
     if [ -f "$currentConfig" ]
-        then
+    then
         diffStatus="$(diff $currentConfig $tempConfig)"
         if $diffStatus > /dev/null 2>&1
-            then
-                echo "config files are equal"
-            else
-                echo "config files are different"
-                mv $currentConfig $backupConfig
-                mv $tempConfig $currentConfig
-                service dnsmasq restart
-                curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/n$
-            fi
+        then
+            echo "config files are equal"
         else
-            echo "No config file found. Setting up smartdns"
+            echo "config files are different"
+            mv $currentConfig $backupConfig
             mv $tempConfig $currentConfig
             service dnsmasq restart
-            curl -s --data "text=smartdns setup complete" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev$
+            curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/n$
+        fi
+    else
+        echo "No config file found. Setting up smartdns"
+        mv $tempConfig $currentConfig
+        service dnsmasq restart
+        curl -s --data "text=smartdns setup complete" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev$
     fi
 fi

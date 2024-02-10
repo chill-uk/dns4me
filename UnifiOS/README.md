@@ -113,7 +113,7 @@ Delete the current dns4me config:
 
 ```sh
 rm /run/dnsmasq.conf.d/dns4me.conf
-service dnsmasq restart
+killall dnsmasq
 ```
 
 Check your dns4me Api Key and try again

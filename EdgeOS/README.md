@@ -46,7 +46,7 @@ set service dhcp-server static-arp disable
   * Be sure to check that you've added your public IP and enabled the services you want to be unblocked.
 * [SSH access to your EdgeOS device](https://community.ui.com/questions/How-to-on-accessing-Edge-Router-X-via-SSH-feel-free-to-critique-this-way-I-can-remember/375d4be0-1d05-445f-a37b-4ddf8ecbca65)
 
-* SSH into your EdgeOS device and enable the dnsmasq service:
+### SSH into your EdgeOS device and enable the dnsmasq service:
 
 ```vyos
 configure 
@@ -78,13 +78,17 @@ sudo apt install nano -y
 
 ## Configuring and setup
 
-* Place the following script `dns4me.sh` into the `/config/scripts` folder on your edgerouter.
+* SSH into your edgeOS device and place the following script `dns4me.sh` into the `/config/scripts` folder.
+
+```sh
+cd /config/scripts
+curl https://raw.githubusercontent.com/chill-uk/dns4me/main/EdgeOS/dns4me.sh -O
+```
 
 * Make the script executable
 
 ```sh
 cd /config/scripts
-curl https://raw.githubusercontent.com/chill-uk/dns4me/main/EdgeOS/dns4me.sh -O
 chmod+x dns4me.sh
 ```
 

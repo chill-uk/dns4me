@@ -37,7 +37,7 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 
 ## Configuring and setup
 
-* Place the following script `dns4me.sh` into the `/data/custom/dns4me` folder on your UXG.
+* SSH into your UnifiOS device and place the following script `dns4me.sh` into the `/data/custom/dns4me` folder.
 
 ```sh
 mkdir -p /data/custom/dns4me

@@ -31,6 +31,7 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 ## Pre-requisites:
 
 * [Create and account with DNS4ME and set it up to your liking](https://dns4me.net/)
+* [SSH access to your UnifiOS device](https://help.ui.com/hc/en-us/articles/204909374-UniFi-Connect-with-SSH-Advanced)
 
 (Be sure to check that you've added your public IP and enabled the services you want to be unblocked.)
 

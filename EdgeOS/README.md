@@ -28,7 +28,6 @@ This script will enable all of your devices on your network to benefit from geo-
 
 I'm assuming that you have a `dhcp-server` service running on your edgerouter/vyos device and the `dns-server` is set to itself.
 
-
 e.g.
 ```
 set service dhcp-server disabled false
@@ -44,12 +43,12 @@ set service dhcp-server static-arp disable
 ## Pre-requisites:
 
 * [Create and account with DNS4ME and set it up to your liking](https://dns4me.net/)
+  * Be sure to check that you've added your public IP and enabled the services you want to be unblocked.
+* [SSH access to your EdgeOS device](https://community.ui.com/questions/How-to-on-accessing-Edge-Router-X-via-SSH-feel-free-to-critique-this-way-I-can-remember/375d4be0-1d05-445f-a37b-4ddf8ecbca65)
 
-(Be sure to check that you've added your public IP and enabled the services you want to be unblocked.)
+* SSH into your EdgeOS device and enable the dnsmasq service:
 
-* Enable the dnsmasq service on your edgerouter:
-
-```
+```vyos
 configure 
 set service dhcp-server use-dnsmasq enable 
 commit ; save ; exit
@@ -85,6 +84,7 @@ sudo apt install nano -y
 
 ```sh
 cd /config/scripts
+curl https://raw.githubusercontent.com/chill-uk/dns4me/main/EdgeOS/dns4me.sh -O
 chmod+x dns4me.sh
 ```
 

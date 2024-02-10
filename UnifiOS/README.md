@@ -60,6 +60,13 @@ chmod+x dns4me.sh
 ```sh
 dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
+* Add a `cron job` to run periodically and on each reboot
+
+```sh
+cd /etc/cron.d
+curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/UnifiOS/dns4me_cron -O
+service cron reload
+```
 
 ### Optional - telegram notifications:
 

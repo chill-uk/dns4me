@@ -41,7 +41,7 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 ```sh
 mkdir -p /data/custom/dns4me
 cd /data/custom/dns4me
-curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/dns4me.sh -O
+curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/UnifiOS/dns4me.sh -O
 ```
 
 * Make the script executable

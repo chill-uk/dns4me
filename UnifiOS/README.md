@@ -84,7 +84,7 @@ groupId=xxxxxxxx
 botToken=xxxxx:xxxxxx-xxxxx-xxxx
 ```
 
-Uncomment these line in the dns4me.sh script:
+Uncomment these lines in the dns4me.sh script:
 
 ```sh
 #curl -s --data "text=DNS4ME changed: $diff_status" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null

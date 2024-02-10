@@ -36,12 +36,18 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 
 ## Configuring and setup
 
-* Place the following script `dns4me.sh` into the `/config/scripts` folder on your edgerouter.
+* Place the following script `dns4me.sh` into the `/data/custom/dns4me` folder on your UXG.
+
+```sh
+mkdir -p /data/custom/dns4me
+cd /data/custom/dns4me
+curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/dns4me.sh -O
+```
 
 * Make the script executable
 
 ```sh
-cd /config/scripts
+cd /data/custom/dns4me
 chmod+x dns4me.sh
 ```
 

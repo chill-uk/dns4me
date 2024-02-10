@@ -132,6 +132,21 @@ Uncomment this line in the dns4me.sh script:
 
 ## Finished!
 
+* Manually run the script once to check everything is working
+
+```sh
+cd /config/scripts
+./dns4me.sh
+```
+Output:
+```sh
+Updating DNS4ME
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2684  100  2684    0     0   4364      0 --:--:-- --:--:-- --:--:--  4364
+No config file found. Setting up smartdns
+```
+
 * If all went well, visit the [DNS4ME Status](http://dns4me.net/check) page to check if all of the tests pass.
 
 * Sit back and enjoy all of your favourite services geo-unblocked on all of your devices on your network.

@@ -53,7 +53,7 @@ chmod+x dns4me.sh
 
 * Log into DNS4ME and navigate to the [hostfile page](https://dns4me.net/user/hosts_file) and copy your `Raw dnsmasq API URL`
 
-`It should look something like "https://dns4me.net/api/v2/get_hosts/dnsmasq/(APIKEY)"`
+It should look something like `https://dns4me.net/api/v2/get_hosts/dnsmasq/{APIKEY}`
 
 * Edit the following line in the dns4me.sh script with your API Key
 
@@ -69,7 +69,7 @@ curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/UnifiOS/dns4m
 service cron reload
 ```
 
-### Optional - telegram notifications:
+## Optional - telegram notifications:
 
 If you want telegram integrations, follow the instructions below:
 
@@ -84,10 +84,14 @@ groupId=xxxxxxxx
 botToken=xxxxx:xxxxxx-xxxxx-xxxx
 ```
 
-Uncomment this line in the dns4me.sh script:
+Uncomment these line in the dns4me.sh script:
 
 ```sh
 #curl -s --data "text=DNS4ME changed: $diff_status" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null
+```
+and
+```sh
+#curl -s --data "text=smartdns setup complete" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev$
 ```
 
 ## Finished!

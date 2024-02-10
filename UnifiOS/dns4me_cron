@@ -1,0 +1,3 @@
+MAILTO=""
+@reboot root /data/custom/dns4me.sh
+0 0 * * * root /data/custom/dns4me.sh

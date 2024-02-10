@@ -1,4 +1,4 @@
-# dns4me setup for UnifiOs
+# dns4me setup for UnifiOS
 
 Do you hate having to set up DNS4ME's DNS servers on all of your individual devices?
 

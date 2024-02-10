@@ -60,6 +60,7 @@ chmod+x dns4me.sh
 ```sh
 dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
+
 * Add a `cron job` to run periodically and on each reboot
 
 ```sh
@@ -91,6 +92,13 @@ Uncomment this line in the dns4me.sh script:
 
 ## Finished!
 
+* Manually run the script once to check everything is working
+
+```sh
+cd /data/custom/dns4me
+./dns4me.sh
+```
+
 * If all went well, visit the [DNS4ME Status](http://dns4me.net/check) page to check if all of the tests pass.
 
 * Sit back and enjoy all of your favourite services geo-unblocked on all of your devices on your network.
@@ -104,7 +112,7 @@ You have probably entered the wrong dns4me Api Key.
 Delete the current dns4me config:
 
 ```sh
-rm /etc/dnsmasq.d/03-dns4me.conf
+rm /run/dnsmasq.conf.d/dns4me.conf
 service dnsmasq restart
 ```
 

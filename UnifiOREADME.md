@@ -1,7 +1,5 @@
 # dns4me setup for UnifiOS
 
-`Big shout out to https://github.com/StoneLabs/unifi-uxg-dnsmasq for working out how to add persistent dnsmasq entries to UnifiOS.`
-
 Do you hate having to set up DNS4ME's DNS servers on all of your individual devices?
 
 Want to keep your existing upstream DNS provider (1.1.1.1 / 8.8.8.8 / Encrypted DNS)?
@@ -98,3 +96,7 @@ service dnsmasq restart
 ```
 
 Check your dns4me Api Key and try again
+
+## CREDITS
+Big shout out to [StoneLabs](https://github.com/StoneLabs) for working out how to add persistent dnsmasq entries to UnifiOS.\
+The repo can be found here: [StoneLabs/unifi-uxg-dnsmasq](https://github.com/StoneLabs/unifi-uxg-dnsmasq)

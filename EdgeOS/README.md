@@ -94,7 +94,7 @@ chmod+x dns4me.sh
 
 * Log into DNS4ME and navigate to the [hostfile page](https://dns4me.net/user/hosts_file) and copy your `Raw dnsmasq API URL`
 
-`It should look something like "https://dns4me.net/api/v2/get_hosts/dnsmasq/(APIKEY)"`
+It should look something like `https://dns4me.net/api/v2/get_hosts/dnsmasq/(APIKEY)`
 
 * Edit the following line in the dns4me.sh script with your API Key
 

@@ -39,12 +39,12 @@ EOF
             mv $currentConfig $backupConfig
             mv $tempConfig $currentConfig
             service dnsmasq restart
-            #curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/n$
+            #curl -s --data "text=DNS4ME changed: $diffStatus" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null 2>&1
         fi
     else
         echo "No config file found. Setting up smartdns"
         mv $tempConfig $currentConfig
         service dnsmasq restart
-        #curl -s --data "text=smartdns setup complete" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev$
+        #curl -s --data "text=smartdns setup complete" --data "chat_id=$groupId" 'https://api.telegram.org/bot'$botToken'/sendMessage' > /dev/null 2>&1
     fi
 fi

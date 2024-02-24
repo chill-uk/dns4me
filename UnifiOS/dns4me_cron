@@ -1,3 +1,3 @@
 MAILTO=""
-@reboot sleep 60 && /data/custom/dns4me/dns4me.sh
+@reboot sleep 120 && /data/custom/dns4me/dns4me.sh
 0 0 * * * /data/custom/dns4me/dns4me.sh

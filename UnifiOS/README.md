@@ -48,7 +48,7 @@ curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me.sh -O
 
 ```sh
 cd /data/custom/dns4me
-chmod+x dns4me.sh
+chmod +x dns4me.sh
 ```
 
 * Log into DNS4ME and navigate to the [hostfile page](https://dns4me.net/user/hosts_file) and copy your `Raw dnsmasq API URL`

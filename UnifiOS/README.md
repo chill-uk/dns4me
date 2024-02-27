@@ -65,7 +65,7 @@ dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ```sh
 cd /etc/cron.d
-curl https://raw.githubusercontent.com/chill-uk/dns4me-EdgeOS/main/UnifiOS/dns4me_cron -O
+curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me_cron -O
 service cron reload
 ```
 

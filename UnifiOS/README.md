@@ -14,6 +14,7 @@ This script will enable all of your devices on your network to benefit from geo-
 | device           | version                | compatible |
 |------------------|------------------------|------------|
 | UXG-Lite | 3.1.15 | yes        |
+| UCG-Ultra | 3.2.12 | yes |
 
 ## Overview
 

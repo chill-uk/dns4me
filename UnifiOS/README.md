@@ -131,6 +131,12 @@ killall dnsmasq
 
 Check your dns4me Api Key and try again
 
+* My gateway restarted/updated and geo-unblocking is not working
+
+Unfortunately it looks like the dnsmasq entries get removed after an upgrade or a reboot.
+
+I have tried to use @reboot entry in cron to automatically reload dns4me after a restart, but it doesnt look like @reboot is supported. 
+
 ## CREDITS
 Big shout out to [StoneLabs](https://github.com/StoneLabs) for working out how to add persistent dnsmasq entries to UnifiOS.\
 The repo can be found here: [StoneLabs/unifi-uxg-dnsmasq](https://github.com/StoneLabs/unifi-uxg-dnsmasq)

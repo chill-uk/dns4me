@@ -135,7 +135,13 @@ Check your dns4me Api Key and try again
 
 Unfortunately it looks like the dnsmasq entries get removed after an upgrade or a reboot.
 
-I have tried to use @reboot entry in cron to automatically reload dns4me after a restart, but it doesnt look like @reboot is supported. 
+I have tried to use the @reboot entry in cron to automatically reload dns4me after a restart, but it doesnt look like it's supported. 
+
+You might have to manually log back in and run the script manually.
+```sh
+cd /data/custom/dns4me
+./dns4me.sh
+```
 
 ## CREDITS
 Big shout out to [StoneLabs](https://github.com/StoneLabs) for working out how to add persistent dnsmasq entries to UnifiOS.\

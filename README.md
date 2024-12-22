@@ -15,6 +15,6 @@ This script will enable all of your devices on your network to benefit from geo-
 |------------------|------------------------|------------|
 | EdgeRouterLite-3 | EdgeOS v2.0.9-hotfix.4 | yes |
 | UXG-Lite | 3.1.15 | yes |
-| UCG-Ultra | 3.2.x - 4.0.x | yes |
+| UCG-Ultra | 3.2.x - 4.x.x | yes |
 
 The script has been updated to work with UnifiOS, so the folder structure has moved to EdgeOS or UnifiOS (depending on your gateway / edgerouter)

@@ -1,9 +1,18 @@
 
 #!/bin/bash
 
+# This script is used to update the dnsmasq configuration for DNS4ME.
+# It downloads the latest DNS4ME entries and updates the dnsmasq configuration file.
+# It also sends a message to a Telegram group if the configuration has changed.
+
+
+# Make sure to set the following variables before running the script
 groupId=xxxxxxxxx
+# groupId: The Telegram group ID where the message will be sent.
 botToken=xxxxxxxxx:xxxxxx-xxxxxxxxxxxxxxxxxxxx-xxxxxxx
+# botToken: The Telegram bot token used to send the message.
 dns4meApikey=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# dns4meApikey: Your DNS4ME API key.
 currentConfig=/run/dnsmasq.conf.d/dns4me.conf
 tempConfig=/dev/shm/dns4me.conf
 backupConfig=/tmp/dns4me_`date +%d%b%Y`.conf

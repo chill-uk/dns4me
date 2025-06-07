@@ -24,7 +24,7 @@ This script will enable all of your devices on your network to benefit from geo-
 * A `diff` is performed to compare the current and downloaded configs.
 * If the downloaded config is different, the current config is backed up in /tmp/ and the current config is overwritten.
 * The dnsmasq service is then restarted for the new changes to take effect.
-* (optional) A telegram notification is sent contianing the change to the config.
+* (optional) A telegram notification is sent containing the change to the config.
 
 ## Assumptions:
 
@@ -38,12 +38,22 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 
 ## Configuring and setup
 
+### Quick Install
+
+You can install everything with a single command:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/setup_dns4me.sh | sudo bash
+```
+
+### Manual Install
+
 * SSH into your UnifiOS device and place the following script `dns4me.sh` into the `/data/custom/dns4me` folder.
 
 ```sh
 mkdir -p /data/custom/dns4me
 cd /data/custom/dns4me
-curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me.sh -O
+curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/data/custom/dns4me/dns4me.sh -O
 ```
 
 * Make the script executable
@@ -51,6 +61,24 @@ curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me.sh -O
 ```sh
 cd /data/custom/dns4me
 chmod +x dns4me.sh
+```
+
+* Add the `dns4me.service` to the system.d folder
+```sh
+cd /lib/systemd/system
+curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.service -O
+```
+* Reload systemd, enable the dns4me service and start it
+
+```sh
+systemctl daemon-reload
+systemctl enable dns4me.service
+systemctl start dns4me.service
+```
+
+* To view logs for the service, use:
+```sh
+journalctl -u dns4me.service
 ```
 
 * Log into DNS4ME and navigate to the [hostfile page](https://dns4me.net/user/hosts_file) and copy your `Raw dnsmasq API URL`
@@ -63,7 +91,7 @@ It should look something like `https://dns4me.net/api/v2/get_hosts/dnsmasq/{APIK
 dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-* Add a `cron job` to run periodically and on each reboot
+* Add a `cron job` to run periodically
 
 ```sh
 cd /etc/cron.d

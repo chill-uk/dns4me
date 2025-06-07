@@ -164,12 +164,13 @@ Check your dns4me Api Key and try again
 
 Unfortunately it looks like the dnsmasq entries are removed after an upgrade. Run the setup_dns4me.sh script again to re-install it.
 
-If it's not working after a reboot of your Unifi device, check that the systemd dns4me.service is enabled and started.
-
-If that's not working, log back in and run the script manually to check if it's running properly.
+If it's not working after a reboot, check that the systemd dns4me.service is enabled and started.
 ```sh
-cd /data/custom/dns4me
-./dns4me.sh
+systemctl status dns4me.service
+```
+To view logs for the service, use:
+```sh
+journalctl -u dns4me.service
 ```
 
 ## CREDITS

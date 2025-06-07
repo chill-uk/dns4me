@@ -162,11 +162,11 @@ Check your dns4me Api Key and try again
 
 * My gateway restarted/updated and geo-unblocking is now not working
 
-Unfortunately it looks like the dnsmasq entries are removed after either an upgrade. Run the setup_dns4me.sh script again to get it re-installed.
+Unfortunately it looks like the dnsmasq entries are removed after an upgrade. Run the setup_dns4me.sh script again to re-install it.
 
-If it's not working after a reboot of your Unifi device, check that the systemd dns4me service is enabled and started.
+If it's not working after a reboot of your Unifi device, check that the systemd dns4me.service is enabled and started.
 
-You might have to manually log back in and run the script manually.
+If that's not working, log back in and run the script manually to check if it's running properly.
 ```sh
 cd /data/custom/dns4me
 ./dns4me.sh

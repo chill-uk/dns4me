@@ -43,7 +43,7 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 You can install everything with a single command:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/setup_dns4me.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/setup_dns4me.sh | sudo bash
 ```
 
 ### Manual Install
@@ -160,11 +160,11 @@ killall dnsmasq
 
 Check your dns4me Api Key and try again
 
-* My gateway restarted/updated and geo-unblocking is not working
+* My gateway restarted/updated and geo-unblocking is now not working
 
-Unfortunately it looks like the dnsmasq entries get removed after an upgrade or a reboot.
+Unfortunately it looks like the dnsmasq entries are removed after either an upgrade. Run the setup_dns4me.sh script again to get it re-installed.
 
-I have tried to use the @reboot entry in cron to automatically reload dns4me after a restart, but it doesnt look like it's supported. 
+If it's not working after a reboot of your Unifi device, check that the systemd dns4me service is enabled and started.
 
 You might have to manually log back in and run the script manually.
 ```sh

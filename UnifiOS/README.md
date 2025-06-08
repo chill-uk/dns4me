@@ -52,33 +52,13 @@ curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/setup_
 
 ```sh
 mkdir -p /data/custom/dns4me
-cd /data/custom/dns4me
-curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/data/custom/dns4me/dns4me.sh -O
+curl -o /data/custom/dns4me/dns4me.sh https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/data/custom/dns4me/dns4me.sh
 ```
 
 * Make the script executable
 
 ```sh
-cd /data/custom/dns4me
 chmod +x dns4me.sh
-```
-
-* Add the `dns4me.service` to the system.d folder
-```sh
-cd /lib/systemd/system
-curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.service -O
-```
-* Reload systemd, enable the dns4me service and start it
-
-```sh
-systemctl daemon-reload
-systemctl enable dns4me.service
-systemctl start dns4me.service
-```
-
-* To view logs for the service, use:
-```sh
-journalctl -u dns4me.service
 ```
 
 * Log into DNS4ME and navigate to the [hostfile page](https://dns4me.net/user/hosts_file) and copy your `Raw dnsmasq API URL`
@@ -91,13 +71,60 @@ It should look something like `https://dns4me.net/api/v2/get_hosts/dnsmasq/{APIK
 dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-* Add a `cron job` to run periodically
+* Add the `dns4me.service` to the systemd folder
+```sh
+curl -o /lib/systemd/system/dns4me.service https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.service 
+```
+* Reload systemd, enable the dns4me service and start it
 
 ```sh
-cd /etc/cron.d
-curl https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me_cron -O
-/etc/init.d/cron restart
+sudo systemctl daemon-reload
+sudo systemctl enable dns4me.service
+sudo systemctl start dns4me.service
 ```
+
+* To view logs for the service, use:
+```sh
+sudo journalctl -u dns4me.service
+```
+## Setting up a timer for automatic updates
+
+* Either configure a cron job OR a systemd timer, not both.
+
+### Cron Job Setup (Legacy / Not Recommended)
+
+* Add a `cron job` to run periodically. 
+
+```sh
+curl -o /etc/cron.d/dns4me_cron https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/etc/cron.d/dns4me_cron
+sudo /etc/init.d/cron restart
+```
+
+### Systemd Timer Setup (Recommended)
+
+* Add a `systemd timer` to run periodically. 
+
+```sh
+curl -o /lib/systemd/system/dns4me.timer https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.timer
+sudo systemctl daemon-reload
+sudo systemctl enable --now dns4me.timer
+```
+
+This will run the update at midnight every night (and, if configured, at boot).
+
+You can check the timer status with:
+
+```sh
+sudo systemctl status dns4me.timer
+```
+
+Logs for the timer activity can be viewed with:
+
+```sh
+sudo journalctl -u dns4me.timer
+```
+
+Note: `journalctl -u dns4me.timer` shows timer scheduling events, while `journalctl -u dns4me.service` shows the script’s output.
 
 ## Optional - telegram notifications:
 
@@ -172,6 +199,10 @@ To view logs for the service, use:
 ```sh
 journalctl -u dns4me.service
 ```
+
+## Security Note
+
+**Important:** Never share your DNS4ME API key or Telegram bot token publicly. Treat these credentials as sensitive information to protect your account and prevent unauthorized access or abuse.
 
 ## CREDITS
 Big shout out to [StoneLabs](https://github.com/StoneLabs) for working out how to add persistent dnsmasq entries to UnifiOS.\

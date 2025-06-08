@@ -4,6 +4,8 @@
 
 set -e
 
+BASE_URL="https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS"
+
 # --- Validation Section ---
 # Check for root privileges
 if [[ $EUID -ne 0 ]]; then
@@ -30,8 +32,7 @@ fi
 # 1. Download dns4me.sh to /data/custom/dns4me
 echo "Creating /data/custom/dns4me and downloading dns4me.sh..."
 mkdir -p /data/custom/dns4me
-cd /data/custom/dns4me
-if curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/data/custom/dns4me/dns4me.sh -o dns4me.sh; then
+if curl -fsSL "$BASE_URL/data/custom/dns4me/dns4me.sh" -o /data/custom/dns4me/dns4me.sh; then
   echo "[OK] dns4me.sh downloaded."
 else
   echo "[ERROR] Failed to download dns4me.sh." >&2
@@ -44,7 +45,7 @@ chmod +x dns4me.sh
 
 # 3. Download the systemd service file
 echo "Downloading dns4me.service to /lib/systemd/system..."
-if curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.service -o /lib/systemd/system/dns4me.service; then
+if curl -fsSL "$BASE_URL/lib/systemd/system/dns4me.service" -o /lib/systemd/system/dns4me.service; then
   echo "[OK] dns4me.service downloaded."
 else
   echo "[ERROR] Failed to download dns4me.service." >&2
@@ -62,15 +63,18 @@ else
   echo "[WARNING] dns4me.service may not be running. Check with: systemctl status dns4me.service" >&2
 fi
 
-# 5. (Optional) Download cron job for periodic updates
-echo "Downloading cron job to /etc/cron.d and restarting cron..."
-if curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/dns4me_cron -o /etc/cron.d/dns4me_cron; then
-  echo "[OK] Cron job installed."
+# 5. (Optional) Install systemd timer for periodic updates
+echo "Downloading dns4me.timer to /lib/systemd/system..."
+if curl -fsSL "$BASE_URL/lib/systemd/system/dns4me.timer" -o /lib/systemd/system/dns4me.timer; then
+  systemctl daemon-reload
+  systemctl enable --now dns4me.timer
+  if systemctl is-active --quiet dns4me.timer; then
+    echo "[OK] dns4me.timer is active."
+  else
+    echo "[WARNING] dns4me.timer may not be running. Check with: systemctl status dns4me.timer" >&2
+  fi
 else
-  echo "[WARNING] Failed to download cron job. Skipping." >&2
-fi
-if [[ -x /etc/init.d/cron ]]; then
-  /etc/init.d/cron restart || true
+  echo "[WARNING] Failed to download dns4me.timer. Skipping timer setup." >&2
 fi
 
 # 6. Reminder to edit API key and Telegram info

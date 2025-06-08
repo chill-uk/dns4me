@@ -5,8 +5,6 @@ After=network.target
 [Service]
 Type=oneshot
 ExecStart=/data/custom/dns4me/dns4me.sh
-StandardOutput=journal
-StandardError=journal
 RemainAfterExit=yes
 
 [Install]

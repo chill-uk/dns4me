@@ -27,14 +27,9 @@ if [ -z "$dnsmasqEntries" ]
 then
     echo "Could not download dnsmasq entries from dns4me.net. Please check your dns4me Api Key and try again."
 else
-    ubios-udapi-client GET -r /services | \
-    jq '[.dnsForwarder.domainForwards[].domainName] | \
-    sort' > $currentConfig
+    ubios-udapi-client GET -r /services | jq '[.dnsForwarder.domainForwards[].domainName] | sort' > $currentConfig
     
-    { echo "$dnsmasqEntries" | grep -v '52\.29\.2\.17$' | \
-    sed 's/^server=\///; s/3\.10\.65\.124//g' | \
-    tr '/' '\n'; echo "dns4me.net"; } | \
-    sort | awk 'NF' | jq -R . | jq -s . > $tempConfig
+    { echo "$dnsmasqEntries" | grep -v '52\.29\.2\.17$' | sed 's/^server=\///; s/3\.10\.65\.124//g' | tr '/' '\n'; echo "dns4me.net"; } | sort | awk 'NF' | jq -R . | jq -s . > $tempConfig
 
     diffStatus="$(diff $currentConfig $tempConfig)"
     if $diffStatus > /dev/null 2>&1

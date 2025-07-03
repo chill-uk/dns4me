@@ -1,6 +1,7 @@
-# dns4me setup for UnifiOS
+# dns4me setup for UnifiOS-Dev
 
 THIS IS THE ALPHA-DEVELOPMENT SCRIPT FOR FIRMWARE 4.3.5
+
 THIS SCRIPT WILL ALTER ubios-udapi-server.state FILE VIA THE ubios-udapi-client POST COMMAND.
 
 CURRENTLY IT WILL JUST READ YOUR STATE FILE, BUT ONCE TESTING IS COMPLETE, IT WILL AUTOMATICALLY MODIFY YOUR STATE FILE!
@@ -19,7 +20,7 @@ This script will enable all of your devices on your network to benefit from geo-
 | device           | version                | compatible |
 |------------------|------------------------|------------|
 | UXG-Lite | 3.1.15 | yes        |
-| UCG-Ultra | 3.2.x - 4.1x | yes |
+| UCG-Ultra | 4.3.5 | TESTING |
 | UDM Pro | untested | untested |
 
 ## Overview
@@ -39,7 +40,7 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 
 * [Create and account with DNS4ME and set it up to your liking](https://dns4me.net/)
   * Be sure to check that you've added your public IP and enabled the services you want to be unblocked.
-* [SSH access to your UnifiOS device](https://help.ui.com/hc/en-us/articles/204909374-UniFi-Connect-with-SSH-Advanced)
+* [SSH access to your UnifiOS-Dev device](https://help.ui.com/hc/en-us/articles/204909374-UniFi-Connect-with-SSH-Advanced)
 
 ## Configuring and setup
 
@@ -48,16 +49,16 @@ I'm assuming that you have a `dhcp-server` service running on your gateway/udm d
 You can install everything with a single command:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/setup_dns4me.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS-Dev/setup_dns4me.sh | sudo bash
 ```
 
 ### Manual Install
 
-* SSH into your UnifiOS device and place the following script `dns4me.sh` into the `/data/custom/dns4me` folder.
+* SSH into your UnifiOS-Dev device and place the following script `dns4me.sh` into the `/data/custom/dns4me` folder.
 
 ```sh
 mkdir -p /data/custom/dns4me
-curl -o /data/custom/dns4me/dns4me.sh https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/data/custom/dns4me/dns4me.sh
+curl -o /data/custom/dns4me/dns4me.sh https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS-Dev/data/custom/dns4me/dns4me.sh
 ```
 
 * Make the script executable
@@ -78,7 +79,7 @@ dns4meApikey=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 * Add the `dns4me.service` to the systemd folder
 ```sh
-curl -o /lib/systemd/system/dns4me.service https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.service 
+curl -o /lib/systemd/system/dns4me.service https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS-Dev/lib/systemd/system/dns4me.service 
 ```
 * Reload systemd, enable the dns4me service and start it
 
@@ -94,23 +95,12 @@ sudo journalctl -u dns4me.service
 ```
 ## Setting up a timer for automatic updates
 
-* Either configure a cron job OR a systemd timer, not both.
-
-### Cron Job Setup (Legacy / Not Recommended)
-
-* Add a `cron job` to run periodically. 
-
-```sh
-curl -o /etc/cron.d/dns4me_cron https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/etc/cron.d/dns4me_cron
-sudo /etc/init.d/cron restart
-```
-
-### Systemd Timer Setup (Recommended)
+### Systemd Timer Setup
 
 * Add a `systemd timer` to run periodically. 
 
 ```sh
-curl -o /lib/systemd/system/dns4me.timer https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS/lib/systemd/system/dns4me.timer
+curl -o /lib/systemd/system/dns4me.timer https://raw.githubusercontent.com/chill-uk/dns4me/main/UnifiOS-Dev/lib/systemd/system/dns4me.timer
 sudo systemctl daemon-reload
 sudo systemctl enable --now dns4me.timer
 ```
@@ -176,39 +166,3 @@ No config file found. Setting up smartdns
 * If all went well, visit the [DNS4ME Status](http://dns4me.net/check) page to check if all of the tests pass.
 
 * Sit back and enjoy all of your favourite services geo-unblocked on all of your devices on your network.
-
-## FAQ
-
-* I cannot access dns4me.net after running your script.
-
-You have probably entered the wrong dns4me Api Key.
-
-Delete the current dns4me config:
-
-```sh
-rm /run/dnsmasq.conf.d/dns4me.conf
-killall dnsmasq
-```
-
-Check your dns4me Api Key and try again
-
-* My gateway restarted/updated and geo-unblocking is now not working
-
-Unfortunately it looks like the dnsmasq entries are removed after an upgrade. Run the setup_dns4me.sh script again to re-install it.
-
-If it's not working after a reboot, check that the systemd dns4me.service is enabled and started.
-```sh
-systemctl status dns4me.service
-```
-To view logs for the service, use:
-```sh
-journalctl -u dns4me.service
-```
-
-## Security Note
-
-**Important:** Never share your DNS4ME API key or Telegram bot token publicly. Treat these credentials as sensitive information to protect your account and prevent unauthorized access or abuse.
-
-## CREDITS
-Big shout out to [StoneLabs](https://github.com/StoneLabs) for working out how to add persistent dnsmasq entries to UnifiOS.\
-The repo can be found here: [StoneLabs/unifi-uxg-dnsmasq](https://github.com/StoneLabs/unifi-uxg-dnsmasq)

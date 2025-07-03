@@ -17,6 +17,6 @@ This script will enable all of your devices on your network to benefit from geo-
 | UXG-Lite | 3.1.15 | yes |
 | UCG-Ultra | 3.2.x - 4.2.x | yes |
 | UDM Pro | untested | untested |
-| UCG-Ultra | 4.3.5 | No/Breaking |
+| UCG-Ultra | 4.3.5 | ALPHA TESTING in DEV folder |
 
 The script has been updated to work with UnifiOS, so the folder structure has moved to EdgeOS or UnifiOS (depending on your gateway / edgerouter)

@@ -1,0 +1,11 @@
+[Unit]
+Description=DNS4ME Custom Script (Run Once)
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/data/custom/dns4me/dns4me.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

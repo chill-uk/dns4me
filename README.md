@@ -1,3 +1,7 @@
+# This app is no longer maintained.
+
+Please use my new tool [unifi-dns4me](https://github.com/chill-uk/unifi-dns4me) instead.
+
 # dns4me setup for EdgeOS / VyOS / UnifiOS
 
 Do you hate having to set up DNS4ME's DNS servers on all of your individual devices?
